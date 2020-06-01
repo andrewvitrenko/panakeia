@@ -415,7 +415,7 @@ li a {
 
 .category {
   display: block;
-  font: 18px 'Roboto', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: calc(14px + 4 * ((100vw - 320px) / 1680));
   line-height: 1;
   margin-bottom: 6.21622%;
@@ -598,15 +598,3 @@ li a {
         display: block;
         text-align: center;
         margin: 5% 0; } }
-
-/*@media all and (max-width: 430px) {
-    .main_text {
-        line-height: 1.5;
-    }
-}
-
-@media all and (max-width: 360px) {
-    .main_text {
-        line-height: 1;
-    }
-}*/
