@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
-    <title>Document</title>
+    <link rel="stylesheet" href="./css/slider.css">
+    <title>Panakeia restaurant</title>
 </head>
 <body>
     <header>
@@ -17,13 +18,17 @@
         <div class="nav_bar">
             <nav>
                 <ul>
-                    <li>Fusce at</li>
-                    <li>Facilisis</li>
-                    <li class="active">Ante donec</li>
-                    <li>Blandit rhoncus</li>
-                    <li>Placerat</li>
+                    <li><a href="#">Fusce at</a></li>
+                    <li><a href="#">Facilisis</a></li>
+                    <li class="active"><a href="#">Ante donec</a></li>
+                    <li><a href="#">Blandit rhoncus</a></li>
+                    <li><a href="#">Placerat</a></li>
                 </ul>
             </nav>
+        </div>
+
+        <div class="burger">
+            <span></span>
         </div>
     </header>
 
@@ -34,29 +39,31 @@
             <h1>Integer at tortor ut magna</h1>
             <p class="title">finibus lobortis sed quis tellus.</p>
 
-            <div class="menu_list">
-                <div class="menu__item">
-                    <img src="./img/dishes/dish_01.png" alt="dish 1 example" class="example">
-                    <p class="title">Tincidunt</p>
-                    <p class="main_text">
-                        Phasellus arcu justo, ullamcorper non diam sit amet, luctus condimentum metus. Nullam tempus egestas efficirut. Sed quam dolor.
-                    </p>
-                </div>
+            <div class="wrapper">
+                <div class="menu_list">
+                    <div class="menu__item">
+                        <img src="./img/dishes/dish_01.png" alt="dish 1 example" class="example">
+                        <p class="title">Tincidunt</p>
+                        <p class="main_text">
+                            Phasellus arcu justo, ullamcorper non diam sit amet, luctus condimentum metus. Nullam tempus egestas efficirut. Sed quam dolor.
+                        </p>
+                    </div>
 
-                <div class="menu__item">
-                    <img src="./img/dishes/dish_02.png" alt="dish 2 example" class="example">
-                    <p class="title">Duis bibendum</p>
-                    <p class="main_text">
-                        Ut arcu arcu, faucibus eu risus blandit, pulvinar viverra justo. Phasellus arcu justo, ullamcorper non diam sit amet, luctus condimentum metus. In hac habitasse platea dictumst.
-                    </p>
-                </div>
+                    <div class="menu__item">
+                        <img src="./img/dishes/dish_02.png" alt="dish 2 example" class="example">
+                        <p class="title">Duis bibendum</p>
+                        <p class="main_text">
+                            Ut arcu arcu, faucibus eu risus blandit, pulvinar viverra justo. Phasellus arcu justo, ullamcorper non diam sit amet, luctus condimentum metus. In hac habitasse platea dictumst.
+                        </p>
+                    </div>
 
-                <div class="menu__item">
-                    <img src="./img/dishes/dish_03.png" alt="dish 3 example" class="example">
-                    <p class="title">Donec ligula</p>
-                    <p class="main_text">
-                        Nullam tempus egestas efficitur. Sed quam dolor, vulputate sed mattis et sodales quis orci. Ut arcu arcu, faucibus eu risus blandit.
-                    </p>
+                    <div class="menu__item">
+                        <img src="./img/dishes/dish_03.png" alt="dish 3 example" class="example">
+                        <p class="title">Donec ligula</p>
+                        <p class="main_text">
+                            Nullam tempus egestas efficitur. Sed quam dolor, vulputate sed mattis et sodales quis orci. Ut arcu arcu, faucibus eu risus blandit.
+                        </p>
+                    </div>
                 </div>
             </div>
 
@@ -262,25 +269,7 @@
 
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 
-    <script>
-        $(window).ready(function() {
-            let banner = $('.banner');
-            let newsletter = $('.newsletter');
-            let bottom__image = $('.bottom__image');
-            let header = $('header');
-
-            banner.css('height', banner.outerWidth()/2000*1321);
-            newsletter.css('height', newsletter.outerWidth()/2000*383)
-            bottom__image.css('height', newsletter.outerWidth()/2000*383)
-            header.css('height', header.outerWidth()/2000*147)
-
-            $(window).resize(function() {
-                banner.css('height', banner.outerWidth()/2000*1321)
-                newsletter.css('height', newsletter.outerWidth()/2000*383)
-                bottom__image.css('height', newsletter.outerWidth()/2000*383)
-                header.css('height', header.outerWidth()/2000*147)
-            })
-        })
-    </script>
+    <script src="./js/slick.min.js"></script>
+    <script src="./js/main.js"></script>
 </body>
 </html>

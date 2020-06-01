@@ -10,24 +10,24 @@ $maxWidth: 2000;
 	font-size: calc(#{$mobSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth}));
 }
 
-@mixin adaptivHpadding ($pcLeft, $pcRight, $mobLeft, $mobRight) {
-    $maxWidth: $maxWidth - 320;
+@mixin adaptivHpadding ($pcLeft, $pcRight, $mobLeft, $mobRight, $mobWidth) {
+    $maxWidth: $maxWidth - $mobWidth;
     $addLeft: $pcLeft - $mobLeft;
     $addRight: $pcRight - $mobRight;
 
-    padding-left: calc(#{$mobLeft + px} + #{$addLeft} * ((100vw - 320px) / #{$maxWidth}));
+    padding-left: calc(#{$mobLeft + px} + #{$addLeft} * ((100vw - #{$mobWidth + px}) / #{$maxWidth}));
 
-    padding-right: calc(#{$mobRight + px} + #{$addRight} * ((100vw - 320px) / #{$maxWidth}));
+    padding-right: calc(#{$mobRight + px} + #{$addRight} * ((100vw - #{$mobWidth + px}) / #{$maxWidth}));
 }
 
-@mixin adaptivVpadding ($pcTop, $pcBottom, $mobTop, $mobBottom) {
-    $maxWidth: $maxWidth - 320;
+@mixin adaptivVpadding ($pcTop, $pcBottom, $mobTop, $mobBottom, $mobWidth) {
+    $maxWidth: $maxWidth - $mobWidth;
     $addTop: $pcTop - $mobTop;
     $addBottom: $pcBottom - $mobBottom;
 
-    padding-top: calc(#{$mobTop + px} + #{$addTop} * ((100vw - 320px) / #{$maxWidth}));
+    padding-top: calc(#{$mobTop + px} + #{$addTop} * ((100vw - #{$mobWidth + px}) / #{$maxWidth}));
 
-    padding-bottom: calc(#{$mobBottom + px} + #{$addBottom} * ((100vw - 320px) / #{$maxWidth}));
+    padding-bottom: calc(#{$mobBottom + px} + #{$addBottom} * ((100vw - #{$mobWidth + px}) / #{$maxWidth}));
 }
 
 @mixin adaptiv-width ($pcWidth, $mobWidth) {
@@ -45,6 +45,14 @@ html, body {
     width: 100%;
 }
 
+.static {
+    overflow-y: hidden;
+}
+
+.burger {
+    display: none;
+}
+
 * {
     box-sizing: border-box;
     font-family: 'Roboto Slab', sans-serif;
@@ -59,17 +67,25 @@ header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 0 415/2000*100%;
+    //padding: 0 415/2000*100%;
+    //padding: 0 415px;
+    @include adaptivHpadding(415, 415, 50, 50, 768);
     padding-top: 0;
     padding-bottom: 0;
     align-items: center;
     flex-wrap: nowrap;
     color: $text_dark_blue;
     min-height: 75px;
+    height: 147/2000*100vw;
+    position: relative;
+    z-index: 100;
+    background: $gray_hue_01    ;
 }
 
 .nav_bar {
     flex-shrink: 0;
+    flex-basis: 70%;
+    min-width: 500px;
     //flex-grow: 1;
 
     ul {
@@ -78,14 +94,16 @@ header {
         margin: 0;
         display: flex;
         flex-direction: row;
-        justify-content: flex-end;
+        justify-content: space-around;
         flex-wrap: nowrap;
 
         li {
             display: flex;
             flex-direction: column;
             justify-content: center;
-            font-size: 18px;
+            flex-wrap: nowrap;
+            //font-size: 18px;
+            font-size: calc(13px + 5 * ((100vw - 768px) / 1232));
             margin: 0 2.25%;
         }
 
@@ -99,22 +117,39 @@ header {
     }
 }
 
+li {
+    a {
+        display: inline-block;
+        text-decoration: none;
+        color: inherit;
+    }
+}
+
 .active {
-    color: $gray_hue_01;
-    padding: 18/620*100% 24/620*100%;
-    background-color: $orange;
-    border-radius: 30px;
+    //padding: 18/819*100% 24/819*100%;
+    //background-color: $orange;
+    //border-radius: 30px;
+    //width: 144.2/819*100%;
+    a {
+        color: $gray_hue_01;
+        background-color: $orange;
+        border-radius: 30px;
+        @include adaptivVpadding(18, 18, 13, 13, 768);
+        @include adaptivHpadding(24, 24, 17.5, 17.5, 768);
+    }
 }
 
 .comment {
     margin: 0;
     color: $orange;
-    font-size: 16px;
+    font-size: calc(12px + 4 * ((100vw - 768px) / 1232));
+    //font-size: 16px;
     font-weight: 300;
 }
 
 .logo {
-    font-size: 36px;
+    font-size: calc(24px + 12 * ((100vw - 768px) / 1232));
+    //font-size: 36px;
     color: $text_dark_blue;
     text-transform: capitalize;
     margin: 0 0 9px 0;
@@ -123,12 +158,14 @@ header {
 
 .banner {
     position: relative;
-    padding-top: 489px;
+    //padding-top: 489px;
+    @include adaptivVpadding(489, 0, 10, 0, 768);
     text-align: center;
 
     h1 {
         color: white;
-        font-size: 72px;
+        //font-size: 72px;
+        @include adaptiv-font(72, 22);
         font-weight: 300;
         margin-top: 0;
         margin-bottom: 25/2000*100%;
@@ -137,12 +174,15 @@ header {
     .title {
         color: white;
         margin-top: 30/2000*100%;
+        //font-size: 30px;
+        @include adaptiv-font(30, 14);
     }
 
 }
 
 .title {
-    font-size: 30px;
+    //font-size: 30px;
+    @include adaptiv-font(30, 22);
     font-weight: 500;
     margin-top: 30px;
 }
@@ -156,14 +196,18 @@ header {
     height: 100%;
 }
 
-.menu_list {
+.wrapper {
     margin-top: 130/2000*100%;
+}
+
+.menu_list {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     padding: 0;
     flex-wrap: nowrap;
-    padding: 0 415/2000*100%;
+    //padding: 0 415/2000*100%;
+    @include adaptivHpadding(415, 415, 0, 0, 768);
 }
 
 .menu__item {
@@ -173,6 +217,7 @@ header {
 
     .main_text {
         color: white;
+        @include adaptiv-font(15, 12);
     }
 
     img {
@@ -192,22 +237,28 @@ header {
 
     a {
         display: inline-block;
-        font-size: 18px;
+        //font-size: 18px;
+        @include adaptiv-font(18, 12);
         text-decoration: none;
         color: #612316;
         background-color: #fff;
-        padding: 19px 60px;
+        //padding: 19px 60px;
+        padding: 19/2000*100% 60/2000*100%;
         border-radius: 30px;
         font-weight: 400;
     }
 }
 
 .news {
-    padding: 82/2000*100% 415/2000*100% 104/2000*100%;
+    //padding: 82/2000*100% 415/2000*100% 104/2000*100%;
     text-align: center;
+    @include adaptivHpadding(415, 415, 30, 30, 768);
+    padding-top: 82/2000*100%;
+    padding-bottom: 104/2000*100%;
 
     h2 {
-        font-size: 30px;
+        //font-size: 30px;
+        @include adaptiv-font(30, 22);
         margin-top: 0;
         margin-bottom: 85/2000*100%;
     }
@@ -226,10 +277,12 @@ header {
 
     .title {
         margin: 40/370*100% 0 19/370*100%;
+        @include adaptiv-font(30, 22);
     }
 
     .main_text {
         margin-bottom: 40/370*100%;
+        @include adaptiv-font(15, 12);
     }
 
     img {
@@ -239,54 +292,66 @@ header {
 
 .read_more {
     display: inline-block;
-    padding: 20/370*100% 55/370*100%;
+    //padding: 20/370*100% 55/370*100%;
+    @include adaptivVpadding(20, 20, 10, 10, 320);
+    @include adaptivHpadding(55, 55, 27, 27, 320);
+    @include adaptiv-font(15, 12);
     text-decoration: none;
     background-color: #fff;
     color: #4e5159;
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
-    font-size: 15px;
+    //font-size: 15px;
     border-radius: 25.5px;
 }
 
 .newsletter {
     position: relative;
     text-align: center;
-    padding: 93/2000*100% 738/2000*100% 0;
+    //padding: 93/2000*100% 738/2000*100% 0;
+    @include adaptivVpadding(93, 91, 20, 20, 768);
+    @include adaptivHpadding(738, 738, 30, 30, 768);
 
     h2 {
         margin-top: 0;
         color: white;
         text-transform: capitalize;
         letter-spacing: 1px;
-        font-size: 30px;
+        //font-size: 30px;
+        @include adaptiv-font(30, 22);
         font-weight: 600;
-        margin-bottom: 23/524*100%;
+        //margin-bottom: 23/524*100%;
+        margin-bottom: calc(12px + 11 * ((100vw - 768px) / 1232));
     }
 
     .main_text {
         font-family: 'Roboto', sans-serif;
         color: white;
-        margin-bottom: 42/524*100%;
-        font-size: 15px;
+        //margin-bottom: 42/524*100%;
+        //font-size: 15px;
+        @include adaptiv-font(15, 12);
+        margin-bottom: calc(20px + 22 * ((100vw - 768px) / 1232));
     }
 }
 
 .input {
     background-color: rgba(#f1f2f4, 0.2);
-    width: 510/524*100%;
+    //width: 510/524*100%;
+    @include adaptiv-width(510, 300);
     margin: 0 auto;
     border: 1px solid #c7c7c5;
     border-radius: 30px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding-left: 35/510*100%;
+    //padding-left: 35/510*100%;
+    @include adaptivHpadding(35, 0, 15, 0, 768);
     
     input {
         background: none;
         border: none;
-        font-size: 18px;
+        //font-size: 18px;
+        @include adaptiv-font(18, 12);
         color: white;
         outline: none;
         letter-spacing: 0.75px;
@@ -302,16 +367,21 @@ header {
         color: #612316;
         border: none;
         background-color: white;
-        padding: 19px 75px;
+        //padding: 19px 75px;
+        @include adaptivVpadding(19, 19, 10, 10, 320);
+        @include adaptivHpadding(75, 75, 35, 35, 320);
         border-radius: 30px;
-        font-size: 18px;
+        @include adaptiv-font(18, 12);
+        //font-size: 18px;
         box-shadow: none;
     }
 }
 
 .product_details {
     background-color: #fff;
-    padding: 65/2000*100% 371/2000*100% 87/2000*100% 373/2000*100%;
+    //padding: 65/2000*100% 371/2000*100% 87/2000*100% 373/2000*100%;
+    @include adaptivVpadding(65, 87, 10, 30, 768);
+    @include adaptivHpadding(373, 371, 15, 15, 768);
 }
 
 .product {
@@ -363,13 +433,15 @@ header {
     font-family: 'Roboto', sans-serif;
     line-height: 2;
     margin-bottom: 40/628*100%;
+    @include adaptiv-font(16, 12);
 }
 
 .sign__up {
     border: none;
     box-shadow: none;
     padding: 20/628*100% 70/628*100% 20/628*100% 75/628*100%;
-    font-size: 18px;
+    //font-size: 18px;
+    @include adaptiv-font(18, 14);
     border-radius: 30px;
     color: white; 
 }
@@ -378,7 +450,9 @@ header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 100/2000*100% 415/2000*100% 80/2000*100%;
+    //padding: 100/2000*100% 415/2000*100% 80/2000*100%;
+    @include adaptivVpadding(100, 80, 50, 50, 768);
+    @include adaptivHpadding(415, 415, 50, 50, 320);
     background-color: #d75d0e;
     align-items: flex-start;
     flex-wrap: wrap;
@@ -387,11 +461,13 @@ header {
 .categories__column {
     flex-basis: 370/1170*100%;
     text-align: center;
+    min-width: 150px;
 }
 
 .category {
     display: block;
-    font: 18px 'Roboto', sans-serif;
+    font: 18px 'Roboto', sans-serif;//18px
+    @include adaptiv-font(18, 14);
     line-height: 1;
     margin-bottom: 23/370*100%;
     color: white;
@@ -408,10 +484,13 @@ header {
     justify-content: center;
     flex-wrap: wrap;
     text-align: center;
-    padding: 0 650/2000*100%;
+    //padding: 0 650/2000*100%;
+    padding: 0;
+    @include adaptivHpadding(650, 650, 0, 0, 320);
 
     p {
-        font-size: 18px;
+        //font-size: 18px;
+        @include adaptiv-font(18, 12);
         color: rgba(white, 0.8);
         font-family: 'Roboto', sans-serif;
         margin: 0;
@@ -420,7 +499,7 @@ header {
     }
 
     .PS {
-        margin-top: 9/700*100%;
+        margin-top: 9px;
 
         a {
             text-decoration: none;
@@ -428,5 +507,201 @@ header {
             font-weight: 500;
             font-family: 'Roboto', sans-serif;
         }
+    }
+}
+
+/*adaptation*/
+
+@media all and (max-width: 1279px) {
+    .news__container {
+        justify-content: space-around;
+    }
+
+    .news__item {
+        margin-bottom: 5%;
+    }
+}
+
+@media all and (max-width: 767px) {
+    /*styling navigation menu*/
+
+    header {
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+
+    .nav_bar {
+        display: block;
+        transition: all 0.3s;
+        position: absolute;
+        opacity: 0;
+        top: 0;
+        left: 0;
+        z-index: -15;
+        width: 100%;
+        background-color: $gray_hue_01;
+        padding-top: 2%;
+        padding-bottom: 2%;
+        box-shadow: inset 0 2px 5px lightgray;
+        overflow: auto;
+    }
+
+    .burger {
+        display: block;
+        position: relative;
+        width: 30px;
+        height: 20px;
+        background: none;
+
+        span {
+            height: 2px;
+            width: 100%;
+            position: absolute;
+            top: 9px;
+            background-color: $orange;
+            transition: all 0.3s;
+        }
+    }
+
+    .burger::after, .burger::before {
+        content: '';
+        position: absolute;
+        background-color: $orange;
+        height: 2px;
+        transition: all 0.3s;
+        width: 100%;
+    }
+
+    .burger::before {
+        top: 0;
+    }
+
+    .burger::after {
+        bottom: 0;
+    }
+
+    .burger.active {
+        padding: 0;
+        width: 25px;
+        span {
+            transform: scale(0);
+        }
+    }
+
+    .burger.active:before {
+        transform: rotate(45deg);
+        top: 9px;
+    }
+
+    .burger.active:after {
+        transform: rotate(-45deg);
+        bottom: 9px;
+    }
+
+    .nav_bar.visible {
+        top: 100%;
+        opacity: 1;
+        transition: top 0.3s;
+    }
+
+    /*styling main content...*/
+
+    .banner {
+        padding-top: 20px;
+
+        .title {
+            margin-bottom: 1.5%;
+        }
+    }
+
+    .news__container {
+        display: block;
+    }
+
+    .news__item {
+        width: 300px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .menu__item {
+        padding-left: calc(0px + 100 *((100vw - 320px) / 447));
+        padding-right: calc(0px + 100 *((100vw - 320px) / 447));
+    }
+
+    .menu_list {
+        display: block;
+    }
+
+    .wrapper {
+        margin-top: calc(-3px + 103 * ((100vw - 320px) / 447));
+    }
+
+    .product_details {
+        padding-top: 5%;
+    }
+
+    .product {
+        flex-wrap: wrap;
+
+        img {
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+
+    .sign__up {
+        //padding: 20px 70px 20px 75px;
+        @include adaptivVpadding(20, 20, 12, 12, 320);
+        @include adaptivHpadding(75, 70, 50, 45, 320);
+    }
+}
+
+@media all and (max-width: 726px) {
+    .categories {
+        justify-content: space-around;
+    }
+
+    .categories__column {
+        margin-bottom: 5%;
+    }
+}
+
+@media all and (max-width: 499px) {
+    .menu__item {
+        .title {
+            margin-bottom: 2%;
+        }
+    }
+
+    .nav_bar{
+        min-width: 0;
+        top: -500%;
+
+        ul {
+            display: block;
+
+            li {
+                display: block;
+                text-align: center;
+                margin: 5% 0;
+            }
+        }
+    }
+}
+
+@media all and (max-width: 430px) {
+    .main_text {
+        line-height: 1.5;
+    }
+}
+
+@media all and (max-width: 461px) {
+}
+
+@media all and (max-width: 360px) {
+    .main_text {
+        line-height: 1;
     }
 }
