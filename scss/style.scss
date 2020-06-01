@@ -243,7 +243,9 @@ li {
         color: #612316;
         background-color: #fff;
         //padding: 19px 60px;
-        padding: 19/2000*100% 60/2000*100%;
+        //padding: 19/2000*100% 60/2000*100%;
+        @include adaptivVpadding(19, 19, 10, 10, 320);
+        @include adaptivHpadding(60, 60, 30, 30, 320);
         border-radius: 30px;
         font-weight: 400;
     }
@@ -607,7 +609,7 @@ li {
     /*styling main content...*/
 
     .banner {
-        padding-top: 20px;
+        padding-top: calc(10px + 10 * ((100vw - 320px) / 447));
 
         .title {
             margin-bottom: 1.5%;
@@ -622,6 +624,15 @@ li {
         width: 300px;
         margin-left: auto;
         margin-right: auto;
+    }
+
+    .newsletter {
+        padding-top: calc(10px + 10 * ((100vw - 320px) / 447));
+        padding-bottom: calc(10px + 10 * ((100vw - 320px) / 447));
+
+        .background {
+            object-fit: cover;
+        }
     }
 
     .menu__item {
@@ -655,6 +666,12 @@ li {
         //padding: 20px 70px 20px 75px;
         @include adaptivVpadding(20, 20, 12, 12, 320);
         @include adaptivHpadding(75, 70, 50, 45, 320);
+    }
+
+    .menu__item {
+        .main_text {
+            line-height: calc(12px + 13 * ((100vw - 320px) / 447));
+        }
     }
 }
 
@@ -691,17 +708,14 @@ li {
     }
 }
 
-@media all and (max-width: 430px) {
+/*@media all and (max-width: 430px) {
     .main_text {
         line-height: 1.5;
     }
-}
-
-@media all and (max-width: 461px) {
 }
 
 @media all and (max-width: 360px) {
     .main_text {
         line-height: 1;
     }
-}
+}*/
