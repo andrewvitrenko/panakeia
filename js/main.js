@@ -1,5 +1,5 @@
 $(window).ready(function() {
-    //-------------slider-------------
+    //-------------slider-------------//
     let width = parseFloat($(window).width());
     let sliderIsLive;
 
@@ -18,21 +18,18 @@ $(window).ready(function() {
 
 
 
-    //-------------resizing blocks---------------
+    //-------------resizing blocks---------------//
     let banner = $('.banner');
-    //let newsletter = $('.newsletter');
     let bottom__image = $('.bottom__image');
     let header = $('header');
 
     banner.css('height', banner.outerWidth()/2000*1321);
-    //newsletter.css('height', newsletter.outerWidth()/2000*383);
     bottom__image.css('height', bottom__image.outerWidth()/2000*383);
     header.css('height', header.outerWidth()/2000*147);
 
     $(window).resize(function() {
         let width = parseFloat($(window).width())
         banner.css('height', banner.outerWidth()/2000*1321);
-        //newsletter.css('height', newsletter.outerWidth()/2000*383);
         bottom__image.css('height', bottom__image.outerWidth()/2000*383);
         header.css('height', header.outerWidth()/2000*147);
 
@@ -53,7 +50,7 @@ $(window).ready(function() {
     })
 })
 
-//---------------создаем выезд меню------------------------
+//---------------создаем выезд меню------------------------//
 
 $('.burger').click(function() {
     $('.nav_bar').toggleClass('visible')
