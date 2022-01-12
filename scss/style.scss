@@ -101,6 +101,10 @@ header {
             flex-wrap: nowrap;
             font-size: calc(13px + 5 * ((100vw - 768px) / 1232));
             margin: 0 2.25%;
+
+            a {
+                transition: all 0.3s ease-in-out;
+            }
         }
 
         li:last-child {
@@ -110,6 +114,16 @@ header {
         li:first-child {
             margin-left: 0;
         }
+        
+        li:hover {
+            a {
+                color: $gray_hue_01;
+                background-color: $orange;
+                border-radius: 30px;
+                @include adaptivVpadding(18, 18, 13, 13, 768);
+                @include adaptivHpadding(24, 24, 17.5, 17.5, 768);
+            }
+        }
     }
 }
 
@@ -118,16 +132,6 @@ li {
         display: inline-block;
         text-decoration: none;
         color: inherit;
-    }
-}
-
-.active {
-    a {
-        color: $gray_hue_01;
-        background-color: $orange;
-        border-radius: 30px;
-        @include adaptivVpadding(18, 18, 13, 13, 768);
-        @include adaptivHpadding(24, 24, 17.5, 17.5, 768);
     }
 }
 
